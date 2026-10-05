@@ -1,0 +1,38 @@
+[project]
+name = "planetracker"
+version = "0.1.0"
+description = "Aircraft tracking API: OpenSky -> S3 (bronze) -> PostgreSQL (silver) -> MongoDB/PostgreSQL (gold) -> Flask"
+readme = "README.md"
+authors = [
+    { name = "Justin Vinall", email = "jpvinall@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1.3",
+    "python-dotenv>=1.2.4",
+]
+
+[build-system]
+requires = ["uv_build>=0.10.7,<0.11.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.0",
+    "pytest>=9.1.1",
+    "ruff>=0.16.10",
+]
+
+[tool.ruff]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers"]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
