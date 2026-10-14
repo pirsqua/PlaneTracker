@@ -34,8 +34,22 @@ curl http://127.0.0.1:5000/health
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/health` | Liveness check: `{"status": "ok"}` |
+| `GET` | `/version` | Package version from `pyproject.toml` |
 
 Errors are returned as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem details (`application/problem+json`).
+
+## Pipeline
+
+**OpenSky → typed rows** (`opensky.py`): decodes a `/states/all` response exactly as [documented](https://openskynetwork.github.io/opensky-api/rest.html#all-state-vectors), with strict types (no string-to-number coercion). `"states": null` means no aircraft. Rows are 17 fields, or 18 with `extended=1`.
+
+**Silver** (`silver.py`): one `Observation` per row. Pure functions, so replaying a response gives identical rows.
+
+- `icao24` is trimmed and lowercased, and must be 6 hex digits.
+- Callsign and squawk are trimmed; blank becomes null.
+- Epoch seconds become UTC datetimes; every row carries the response's `snapshot_time`.
+- Units move into field names: `baro_altitude_m`, `velocity_mps`, `true_track_deg`, ...
+- Latitude/longitude must be in range and both present or both null.
+- A row that breaks a rule is recorded in `rejected` (with its index in the response) instead of failing the batch.
 
 ## Configuration
 
