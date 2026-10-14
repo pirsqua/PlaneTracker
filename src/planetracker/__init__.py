@@ -17,7 +17,7 @@ def create_app(config: Mapping[str, Any] | None = None) -> Flask:
       2. FLASK_* environment variables (and .env / .flaskenv via the flask CLI)
       3. the ``config`` mapping passed in (used by tests)
     """
-    # An API serves no static files, so drop the default /static/<path> route.
+    # This API serves no static files, so drop the default /static/<path> route.
     app = Flask(__name__, static_folder=None)
 
     app.config.from_object(DefaultConfig)

@@ -39,8 +39,10 @@ htmlcov/
 # Logs
 *.log
 
-# IDE / OS
-.vscode/
+# IDE / OS (share project-wide VS Code settings, ignore the rest)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 .DS_Store
 Thumbs.db

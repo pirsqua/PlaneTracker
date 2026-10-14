@@ -27,10 +27,10 @@ def test_unhandled_exception_returns_generic_json_500() -> None:
 
     @app.get("/boom")
     def boom() -> str:
-        raise RuntimeError("database password is hunter2")
+        raise RuntimeError("database password is foobadoo")
 
     resp = app.test_client().get("/boom")
 
     assert resp.status_code == 500
     assert resp.get_json()["status"] == 500
-    assert "hunter2" not in resp.get_data(as_text=True)
+    assert "foobadoo" not in resp.get_data(as_text=True)

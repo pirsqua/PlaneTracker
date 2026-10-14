@@ -1,0 +1,17 @@
+# Manual requests for the health blueprint.
+# Run with the VS Code "REST Client" extension (humao.rest-client):
+# start the server (`uv run flask run --debug`), then click "Send Request".
+
+@baseUrl = http://127.0.0.1:5000
+
+### Liveness check → 200 {"status": "ok"}
+GET {{baseUrl}}/health
+
+### Package version (from pyproject.toml) → 200 {"version": "..."}
+GET {{baseUrl}}/version
+
+### Unknown route → 404 application/problem+json
+GET {{baseUrl}}/nope
+
+### Wrong method → 405 problem+json with an Allow header
+POST {{baseUrl}}/health

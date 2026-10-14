@@ -53,3 +53,5 @@ uv run ruff check .
 uv run ruff format .
 uv run mypy
 ```
+
+`api-requests/` holds `.http` files for manual testing against a running server, one per blueprint. Open them with the VS Code [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension and click "Send Request".

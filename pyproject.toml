@@ -1,6 +1,6 @@
 [project]
 name = "planetracker"
-version = "0.1.0"
+version = "0.1.1"
 description = "Aircraft tracking API: OpenSky -> S3 (bronze) -> PostgreSQL (silver) -> MongoDB/PostgreSQL (gold) -> Flask"
 readme = "README.md"
 authors = [
