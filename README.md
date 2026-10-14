@@ -1,6 +1,6 @@
 # PlaneTracker
 
-A Flask API over OpenSky aircraft data, built in small slices:
+A Flask API over OpenSky aircraft data, processed through a Bronze → Silver → Gold pipeline:
 
 | Layer | Storage | Job |
 |---|---|---|
